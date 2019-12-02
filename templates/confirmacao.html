@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title> Confirmacao - ADias</title>
+        <style>
+
+            body{
+
+                background-color: #e7e7e7;
+                margin: 2% 20%;
+            }
+
+            h1{
+                font-family: helvetica;
+                text-align: center;
+                color: #309292;
+            }
+
+            .botao{
+
+                width: 100%;
+                border: none;
+                background-color: #309292;
+                padding: 2vh;
+
+                font-family: helvetica;
+                color: white;
+                font-weight: bold;
+                font-size: 3.5vh;
+
+                margin: 2% 0;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <h1>Cliente Cadastrado com sucesso!</h1>
+        <br>
+        <h3>{{ text }}</h3>
+        <a href={{ link }}>{{ link }}</a>
+        <h3>{{ cab }}</h3>
+
+        <input class="botao" type="submit" value="Voltar" onClick="javascript:history.go(-1)">
+    </body>
+</html>

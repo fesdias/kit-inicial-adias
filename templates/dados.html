@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title> Confirmacao - ADias</title>
+        <style>
+
+            body{
+
+                background-color: #e7e7e7;
+                margin: 2% 20%;
+            }
+
+            h1{
+                font-family: helvetica;
+                text-align: center;
+                color: #309292;
+            }
+
+            h3{
+                font-family: helvetica;
+                display: inline;
+            }
+
+            .titulo{
+
+                color: #309292;
+            }
+
+            .texto{
+                color: black;
+            }
+
+            .status{
+
+                display: inline-block;
+                margin: 2%;
+            }
+
+            .nome{
+
+                width: 100%;
+            }
+
+            .botao{
+
+                width: 100%;
+                border: none;
+                background-color: #309292;
+                padding: 2vh;
+
+                font-family: helvetica;
+                color: white;
+                font-weight: bold;
+                font-size: 3.5vh;
+
+                margin: 2% 0;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <h1>Cliente</h1>
+        <br>
+        <h3 class = "titulo">Nome: </h3> {{ nome }} <br>
+        <h3 class = "titulo">CPF: </h3> {{ cpf }} <br>
+        <h3 class = "titulo">RG: </h3> {{ rg }} <br>
+        <h3 class = "titulo">Telefone: </h3> {{ tel }} <br>
+        <h3 class = "titulo">Tipo: </h3> {{ tipo }} <br>
+        <h3 class = "titulo">Andamento: </h3> {{ anda }} <br>
+        <h3 class = "titulo">Status: </h3> {{ status }} <br>
+        <br>
+        <br>
+        <h3 class = "titulo">ATUALIZAR INFORMAÇÕES</h3>
+        <br>
+        <br>
+
+        <h3 class = "titulo">Último andamento: </h3>
+            <input class="nome" type="text" name="andamento">
+
+        <h3 class = "titulo">Alterar Status: </h3>
+            <select class="status">
+                <option value="Atendimento">Atendimento</option>
+                <option value="Colher Documentos">Colher Documentos</option>
+                <option value="Cadastro Meu INSS">Cadastro Meu INSS</option>
+                <option value="Análise inicial">Análise inicial</option>
+                <option value="Cálculo do tempo de contribuição">Cálculo do tempo de contribuição</option>
+                <option value="Diligências">Diligências</option>
+                <option value="Petição">Petição</option>
+                <option value="Entrada">Entrada</option>
+            </select>
+
+        <input class="botao" type="submit">
+
+    </body>
+</html>

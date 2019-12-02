@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Cadastro - ADias</title>
+
+        <style>
+
+            body{
+
+                background-color: #e7e7e7;
+                margin: 2% 20%;
+            }
+
+            section {
+                padding: 50px 0;
+            }
+
+            h1{
+                font-family: helvetica;
+                text-align: center;
+                color: #309292;
+            }
+
+            h3{
+                font-family: helvetica;
+                color: #309292;
+                display: inline;
+            }
+
+            input{
+
+                background-color: #e7e7e7;
+                border: none;
+                border-bottom: 2px solid #309292;
+            }
+
+            .nome{
+
+                width: 100%;
+            }
+
+            .CPF{
+
+                display: inline-block;
+                margin: 2%;
+            }
+
+            .botao{
+
+                width: 100%;
+                border: none;
+                background-color: #309292;
+                padding: 2vh;
+
+                font-family: helvetica;
+                color: white;
+                font-weight: bold;
+                font-size: 3.5vh;
+
+                margin: 2% 0;
+            }
+
+
+        </style>
+    </head>
+
+    <body>
+
+        <section>
+            <h1>Cadastrar novo cliente</h1>
+
+            <form action = "{{ url_for('inserir') }}" method = 'POST'>
+                <h3>Nome: </h3>
+                <input class="nome" type="text" name="nome">
+                <br>
+
+                <h3>Nacionalidade: </h3>
+                <input class="CPF" type="text" name="nacao">
+
+                <h3>Estado Civil: </h3>
+                <input class="CPF" type="text" name="estCiv">
+                <br>
+
+                <h3>Sexo: </h3>
+                <select class="CPF" name="sexo">
+                    <option value="m">Masculino</option>
+                    <option value="f">Feminino</option>
+                </select>
+
+                <h3>CPF: </h3>
+                <input class="CPF" type="text" name="CPF">
+
+                <h3>RG: </h3>
+                <input class="CPF" type="text" name="RG">
+                <br>
+
+                <h3>Profissão: </h3>
+                <input class="CPF" type="text" name="prof">
+
+                <h3>Data de Nascimento: </h3>
+                <input class="CPF" type="text" name="nasc">
+                <br>
+
+                <h3>Endereço: </h3>
+                <input class="nome" type="text" name="end">
+
+                <h3>Cidade: </h3>
+                <input class="CPF" type="text" name="city">
+
+                <h3>Estado: </h3>
+                <select class="CPF" name="state">
+                    <option value="SP">SP</option>
+                    <option value="RJ">RJ</option>
+                </select>
+
+                <h3>CEP: </h3>
+                <input class="CPF" type="text" name="cep">
+
+                <h3>Telefone: </h3>
+                <input class="CPF" type="text" name="tel">
+
+                <br>
+                <h3>Tipo de ação: </h3>
+                <select class="CPF" name="tipo">
+                    <option value="Vazio">Selecione uma opção</option>
+                    <option value="Aposentadoria Especial">Aposentadoria Especial</option>
+                    <option value="Aposentadoria por idade">Aposentadoria por idade</option>
+                    <option value="Auxílio-Doença">Auxílio-Doença</option>
+                    <option value="Indeferidos">Indeferidos</option>
+                </select>
+<!--
+                <br>
+                <h3>Último andamento: </h3>
+                <input class="nome" type="text" name="andamento">
+
+                <h3>Status: </h3>
+                <select class="CPF" name="status">
+                    <option value="Atendimento">Atendimento</option>
+                    <option value="Colher Documentos">Colher Documentos</option>
+                    <option value="Cadastro Meu INSS">Cadastro Meu INSS</option>
+                    <option value="Análise inicial">Análise inicial</option>
+                    <option value="Cálculo do tempo de contribuição">Cálculo do tempo de contribuição</option>
+                    <option value="Diligências">Diligências</option>
+                    <option value="Petição">Petição</option>
+                    <option value="Entrada">Entrada</option>
+                </select>
+-->
+                <input class="botao" type="submit">
+            </form>
+        </section>
+<!--
+        <section>
+            <h1>Procurar cliente</h1>
+
+            <form action = "{{ url_for('buscar') }}" method = 'POST'>
+                <h3>Nome: </h3>
+                <input class="nome" type="text" name="buscar">
+
+                <input class="botao" type="submit" value="Pesquisar">
+            </form>
+        </section>
+
+        <section>
+            <h1>Senhas Meu Inss</h1>
+
+            <a>Consultar Acervo</a>
+
+        </section>
+-->
+    </body>
+</html>

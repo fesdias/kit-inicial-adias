@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title> Confirmacao - ADias</title>
+        <style>
+
+            body{
+
+                background-color: #e7e7e7;
+                margin: 2% 20%;
+            }
+
+            h1{
+                font-family: helvetica;
+                text-align: center;
+                color: #309292;
+            }
+
+            h3{
+                font-family: helvetica;
+                color: #309292;
+                display: inline;
+            }
+
+
+            .botao{
+
+                width: 100%;
+                border: none;
+                background-color: #309292;
+                padding: 2vh;
+
+                font-family: helvetica;
+                color: white;
+                font-weight: bold;
+                font-size: 3.5vh;
+
+                margin: 2% 0;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <h1>Clientes:</h1>
+        <br>
+
+        {%for i in clientes%}
+            <h3>{{ nome }}</h3>
+        {%endfor%}
+        <input class="botao" type="submit" value="Voltar" onClick="javascript:history.go(-1)">
+    </body>
+</html>

@@ -1,0 +1,24 @@
+
+
+    body{
+
+        background-color: gray;
+        margin: 600px 20%;
+    }
+
+    h1{
+        font-family: helvetica;
+        text-align: center;
+        color: white;
+    }
+
+    h3{
+        font-family: helvetica;
+        color: white;
+    }
+
+    .box{
+
+        color: gray;
+        width: auto;
+    }
