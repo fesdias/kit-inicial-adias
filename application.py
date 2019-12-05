@@ -106,6 +106,10 @@ def preencherTermo(nome, cpf, rg, end, cidade, cep):
 def index():
     return render_template("Acervo.html")
 
+    if __name__ == "__main__":
+        port = int(os.environ.get("PORT", 5000))
+        app.run(host='0.0.0.0', port=port)
+
 @app.route("/enviar", methods = ["POST"])
 def inserir():
 
