@@ -62,7 +62,7 @@ def preencher(doc, nomeDocumento, nome2, text):
 
 def preencherTermo(nome, cpf, rg, end, cidade, cep):
 
-    document = Document("Intranet/Kitinicial/termo.docx")
+    document = Document("Kitinicial/termo.docx")
     titulo = f"{nome} - Termo de Representação.docx"
     doc = f"{nome}/{titulo}"
 
@@ -159,16 +159,16 @@ def inserir():
         print("Já existe a pasta")
         pass
 
-    preencher("Intranet/Kitinicial/procuracao.docx", "Procuração", nome2, text)
-    preencher("Intranet/Kitinicial/pobreza.docx", "Pobreza", nome2, text)
-    preencher("Intranet/Kitinicial/adjudicia.docx", "ADjudicia", nome2, text)
+    preencher("Kitinicial/procuracao.docx", "Procuração", nome2, text)
+    preencher("Kitinicial/pobreza.docx", "Pobreza", nome2, text)
+    preencher("Kitinicial/adjudicia.docx", "ADjudicia", nome2, text)
     preencherTermo(nome2, cpf, rg, end, city, cep)
 
     if (sexo == "f"):
-        preencher("Intranet/Kitinicial/contrato-fem.docx", "Contrato", nome2, text)
+        preencher("Kitinicial/contrato-fem.docx", "Contrato", nome2, text)
 
     else:
-        preencher("Intranet/Kitinicial/contrato-masc.docx", "Contrato", nome2, text)
+        preencher("Kitinicial/contrato-masc.docx", "Contrato", nome2, text)
 
     path = os.getcwd()
     link = f"{path}/{nome2}"
