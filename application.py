@@ -3,6 +3,7 @@
 
 import datetime
 import os
+import re
 
 from flask import Flask, render_template, request
 from docx import Document
@@ -178,18 +179,23 @@ def inserir():
     else:
         Cont = preencher("Kitinicial/contrato-masc.docx", "Contrato", nome2, text)
 
-
-
     path = os.getcwd()
     link = f"{path}/{nome2}"
 
     linkProc = f"{link}/{Proc}"
-    linkPobr = f"{link}/{Pobr}"
-    linkAD = f"{link}/{AD}"
-    linkTermo = f"{link}/{Term}"
-    linkCont = f"{link}/{Cont}"
+    linkProc = re.sub("\s", "%20", linkProc)
 
-    print(linkProc)
+    linkPobr = f"{link}/{Pobr}"
+    linkPobr = re.sub("\s", "%20", linkPobr)
+
+    linkAD = f"{link}/{AD}"
+    linkAD = re.sub("\s", "%20", linkAD)
+
+    linkTermo = f"{link}/{Term}"
+    linkTermo = re.sub("\s", "%20", linkTermo)
+
+    linkCont = f"{link}/{Cont}"
+    linkCont = re.sub("\s", "%20", linkCont)
 
     concluido = f"Encontre os documentos de {nome2} em"
 
