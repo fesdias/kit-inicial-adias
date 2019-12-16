@@ -1,4 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import datetime
 import os
 
@@ -59,10 +61,15 @@ def preencher(doc, nomeDocumento, nome2, text):
 
 
     document.save(doc)
+    return titulo
 
 def preencherTermo(nome, cpf, rg, end, cidade, cep):
 
-    document = Document("Kitinicial/termo.docx")
+    try:
+        document = Document("Kitinicial/termo.docx")
+    except:
+        pass
+
     titulo = f"{nome} - Termo de Representação.docx"
     doc = f"{nome}/{titulo}"
 
@@ -102,14 +109,11 @@ def preencherTermo(nome, cpf, rg, end, cidade, cep):
                 inline[j+1].text = ""
 
         document.save(doc)
+        return titulo
 
 @app.route('/')
 def index():
     return render_template("Acervo.html")
-
-    if __name__ == "__main__":
-        port = int(os.environ.get("PORT", 5000))
-        app.run(host='0.0.0.0', port=port)
 
 @app.route("/enviar", methods = ["POST"])
 def inserir():
@@ -150,7 +154,11 @@ def inserir():
         rg = f"{rg[0]}{rg[1]}.{rg[2]}{rg[3]}{rg[4]}.{rg[5]}{rg[6]}{rg[7]}-{rg[8]}{rg[9]}"
 
     cpf = f"{cpf[0]}{cpf[1]}{cpf[2]}.{cpf[3]}{cpf[4]}{cpf[5]}.{cpf[6]}{cpf[7]}{cpf[8]}-{cpf[9]}{cpf[10]}"
-    text = f"{nome}, {nacao}, {estCiv}, {prof}, portador do RG sob nº {rg}, e do CPF {cpf}, nascido em {nasc}, residente e domiciliado à {end}, {city}/{state} - CEP: {cep}"
+
+    if sexo == 'f':
+        text = f"{nome}, {nacao}, {estCiv}, {prof}, portadora do RG sob nº {rg}, e do CPF {cpf}, nascida em {nasc}, residente e domiciliada à {end}, {city}/{state} - CEP: {cep}"
+    else:
+        text = f"{nome}, {nacao}, {estCiv}, {prof}, portador do RG sob nº {rg}, e do CPF {cpf}, nascido em {nasc}, residente e domiciliado à {end}, {city}/{state} - CEP: {cep}"
 
     try:
         os.mkdir(nome2)
@@ -159,23 +167,33 @@ def inserir():
         print("Já existe a pasta")
         pass
 
-    preencher("Kitinicial/procuracao.docx", "Procuração", nome2, text)
-    preencher("Kitinicial/pobreza.docx", "Pobreza", nome2, text)
-    preencher("Kitinicial/adjudicia.docx", "ADjudicia", nome2, text)
-    preencherTermo(nome2, cpf, rg, end, city, cep)
+    Proc = preencher("Kitinicial/procuracao.docx", "Procuração", nome2, text)
+    Pobr = preencher("Kitinicial/pobreza.docx", "Pobreza", nome2, text)
+    AD = preencher("Kitinicial/adjudicia.docx", "ADjudicia", nome2, text)
+    Term = preencherTermo(nome2, cpf, rg, end, city, cep)
 
     if (sexo == "f"):
-        preencher("Kitinicial/contrato-fem.docx", "Contrato", nome2, text)
+        Cont = preencher("Kitinicial/contrato-fem.docx", "Contrato", nome2, text)
 
     else:
-        preencher("Kitinicial/contrato-masc.docx", "Contrato", nome2, text)
+        Cont = preencher("Kitinicial/contrato-masc.docx", "Contrato", nome2, text)
+
+
 
     path = os.getcwd()
     link = f"{path}/{nome2}"
 
+    linkProc = f"{link}/{Proc}"
+    linkPobr = f"{link}/{Pobr}"
+    linkAD = f"{link}/{AD}"
+    linkTermo = f"{link}/{Term}"
+    linkCont = f"{link}/{Cont}"
+
+    print(linkProc)
+
     concluido = f"Encontre os documentos de {nome2} em"
 
-    return render_template("confirmacao.html", text = concluido, cab = text, link = link)
+    return render_template("confirmacao.html", text = concluido, cab = text, linkProc = linkProc, linkPobr = linkPobr, linkAD = linkAD, linkTermo = linkTermo)
 
 @app.route("/buscar", methods = ["POST", "GET"])
 def buscar():
