@@ -37,11 +37,18 @@
     </head>
     <body>
         <h1>Cliente Cadastrado com sucesso!</h1>
-        <br> <!--
+        <br>
         <h3>{{ text }}</h3>
-        <a href={{ link }}>{{ link }}</a>
+
+        <a href={{ linkProc }} download>Procuração</a><br>
+        <a href={{ linkPobr }} download>Declaração de Pobreza</a><br>
+        <a href={{ linkAD }} download>AD judicia</a><br>
+        <a href={{ linkTermo }} download>Termo de Representação</a><br>
+        <a href={{ linkCont }} download>Contrato</a><br>
+
+
         <h3>{{ cab }}</h3>
-        -->
+
         <input class="botao" type="submit" value="Voltar" onClick="javascript:history.go(-1)">
     </body>
 </html>
