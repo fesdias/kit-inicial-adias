@@ -19,3 +19,4 @@ rsa==4.0
 six==1.13.0
 uritemplate==3.0.0
 Werkzeug==0.16.0
+gunicorn==20.0.4
