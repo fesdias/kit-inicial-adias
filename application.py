@@ -7,6 +7,12 @@ import re
 
 from flask import Flask, render_template, request
 from docx import Document
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+
+g_login = GoogleAuth()
+g_login.LocalWebserverAuth()
+drive = GoogleDrive(g_login)
 
 app = Flask(__name__)
 
@@ -26,7 +32,7 @@ def dataAtual(doc):
 
     return data
 
-def preencher(doc, nomeDocumento, nome2, text):
+def preencher(doc, nomeDocumento, nome2, text, folderId):
 
     document = Document(doc)
     titulo = f"{nome2} - {nomeDocumento}.docx"
@@ -62,9 +68,13 @@ def preencher(doc, nomeDocumento, nome2, text):
 
 
     document.save(doc)
+
+    file = drive.CreateFile({'title': titulo, 'parents': [{'id': folderId}]})
+    file.SetContentFile(doc)
+    file.Upload()
     return titulo
 
-def preencherTermo(nome, cpf, rg, end, cidade, cep):
+def preencherTermo(nome, cpf, rg, end, cidade, cep, folderId):
 
     try:
         document = Document("Kitinicial/termo.docx")
@@ -110,6 +120,9 @@ def preencherTermo(nome, cpf, rg, end, cidade, cep):
                 inline[j+1].text = ""
 
         document.save(doc)
+        file = drive.CreateFile({'title': titulo, 'parents': [{'id': folderId}]})
+        file.SetContentFile(doc)
+        file.Upload()
         return titulo
 
 @app.route('/')
@@ -161,6 +174,7 @@ def inserir():
     else:
         text = f"{nome}, {nacao}, {estCiv}, {prof}, portador do RG sob nº {rg}, e do CPF {cpf}, nascido em {nasc}, residente e domiciliado à {end}, {city}/{state} - CEP: {cep}"
 
+    #Criar pasta sistema
     try:
         os.mkdir(nome2)
         pass
@@ -168,16 +182,23 @@ def inserir():
         print("Já existe a pasta")
         pass
 
-    Proc = preencher("Kitinicial/procuracao.docx", "Procuração", nome2, text)
-    Pobr = preencher("Kitinicial/pobreza.docx", "Pobreza", nome2, text)
-    AD = preencher("Kitinicial/adjudicia.docx", "ADjudicia", nome2, text)
-    Term = preencherTermo(nome2, cpf, rg, end, city, cep)
+    #Criar pasta no drive
+    folder = drive.CreateFile({'title': nome2, 'mimeType' : 'application/vnd.google-apps.folder', 'parents':[{'id':'1-1WHsERatmPkSH1dBgzyniANDWZdBRYQ'}]})
+    folder.Upload()
+    folderId = folder['id']
+    #folderId = '1-1WHsERatmPkSH1dBgzyniANDWZdBRYQ'
+
+    #Criar documento e salvar o caminho no sistema
+    Proc = preencher("Kitinicial/procuracao.docx", "Procuração", nome2, text, folderId)
+    Pobr = preencher("Kitinicial/pobreza.docx", "Pobreza", nome2, text, folderId)
+    AD = preencher("Kitinicial/adjudicia.docx", "ADjudicia", nome2, text, folderId)
+    Term = preencherTermo(nome2, cpf, rg, end, city, cep, folderId)
 
     if (sexo == "f"):
-        Cont = preencher("Kitinicial/contrato-fem.docx", "Contrato", nome2, text)
+        Cont = preencher("Kitinicial/contrato-fem.docx", "Contrato", nome2, text, folderId)
 
     else:
-        Cont = preencher("Kitinicial/contrato-masc.docx", "Contrato", nome2, text)
+        Cont = preencher("Kitinicial/contrato-masc.docx", "Contrato", nome2, text, folderId)
 
     path = os.getcwd()
     link = f"{path}/{nome2}"
