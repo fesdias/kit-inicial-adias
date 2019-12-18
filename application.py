@@ -11,8 +11,8 @@ from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
 g_login = GoogleAuth()
-g_login.LocalWebserverAuth()
-drive = GoogleDrive(g_login)
+g_login.CommandLineAuth()
+drive = GoogleDrive(self.g_login)
 
 app = Flask(__name__)
 
