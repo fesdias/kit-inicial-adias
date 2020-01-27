@@ -11,8 +11,10 @@ from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
 g_login = GoogleAuth()
-g_login.CommandLineAuth()
-drive = GoogleDrive(self.g_login)
+GoogleAuth.DEFAULT_SETTINGS['client_config_file'] = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
+gauth.LoadCredentials()
+#g_login.CommandLineAuth()
+#drive = GoogleDrive(self.g_login)
 
 app = Flask(__name__)
 
