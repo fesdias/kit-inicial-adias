@@ -12,7 +12,7 @@ from pydrive.drive import GoogleDrive
 
 g_login = GoogleAuth()
 GoogleAuth.DEFAULT_SETTINGS['client_config_file'] = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
-gauth.LoadCredentials()
+g_login.LoadCredentials()
 #g_login.CommandLineAuth()
 #drive = GoogleDrive(self.g_login)
 
